@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "ocrdownloader2"
+version = "0.1.0"
+description = "Download songs from OC ReMix before packs are available"
+authors = ["Anthony Porthouse <anthony@porthou.se>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+beautifulsoup4 = "^4.9.3"
+click = "^8.0.0"
+html5lib = "^1.1"
+requests = "^2.25.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[tool.poetry.scripts]
+ocrdownloader = "ocrdownloader2.cli:cli"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
