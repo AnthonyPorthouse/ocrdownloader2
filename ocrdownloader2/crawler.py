@@ -2,9 +2,10 @@ import requests
 import re
 from typing import List, Optional
 from bs4 import BeautifulSoup
+from . import __user_agent__
 from .track import Track
 
-headers = {"User-Agent": "OCRDownloader/2.0.0"}
+headers = {"User-Agent": __user_agent__}
 
 
 def get_tracks(start: int, end: int) -> List[Track]:

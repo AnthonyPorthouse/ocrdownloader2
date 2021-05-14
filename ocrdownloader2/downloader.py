@@ -1,5 +1,6 @@
 import subprocess
 
+from . import __user_agent__
 from .track import Track
 
 
@@ -13,6 +14,7 @@ def aria2_download(directory: str, track: Track):
         "aria2c",
         "--quiet",
         "--check-integrity=true",
+        f"--user-agent=__user_agent__",
         f"--checksum=md5={track.checksum}",
         f"--dir={directory}",
     ]
