@@ -7,7 +7,10 @@ from .downloader import download
 @click.command()
 @click.argument("start", type=click.IntRange(min=1, clamp=True))
 @click.argument("end", type=click.IntRange(min=1, clamp=True), required=False)
-def cli(start: int, end: Optional[int]):
+@click.option(
+    "-o", "--output", type=click.Path(exists=True, file_okay=False, writable=True)
+)
+def cli(start: int, end: Optional[int], output: str):
     """Parse and handle arguments to run OCR Downloader"""
 
     if end is None:
@@ -21,8 +24,9 @@ def cli(start: int, end: Optional[int]):
 
     tracks = get_tracks(start, end)
 
+    click.echo(f"Downloading to: {output}")
     for track in tracks:
-        download(track)
+        download(output, track)
 
 
 def banner() -> str:
