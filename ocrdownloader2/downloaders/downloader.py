@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from ..track import Track
+from ..data.track import Track
 
 
 class Downloader(ABC):

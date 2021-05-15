@@ -1,9 +1,10 @@
 import requests
 import re
-from typing import List, Optional
-from bs4 import BeautifulSoup
+from typing import List, Optional, Tuple, Set
+from bs4 import BeautifulSoup, Tag
 from . import __user_agent__
-from .track import Track
+from .data.track import Track
+from .data.author import Author
 
 headers = {"User-Agent": __user_agent__}
 
@@ -21,7 +22,7 @@ def get_tracks(start: int, end: int) -> List[Track]:
     return tracks
 
 
-def backoff(func):
+def _backoff(func):
     from time import sleep
 
     sleep(2)
@@ -32,12 +33,12 @@ def backoff(func):
     return wrapper
 
 
-@backoff
+@_backoff
 def get_track(track_id) -> Optional[Track]:
 
     print(f"Loading Track: {track_id}")
 
-    url = get_url_for_track(track_id)
+    url = _get_url_for_track(track_id)
 
     try:
         with requests.get(url, headers=headers, timeout=2) as page:
@@ -47,23 +48,41 @@ def get_track(track_id) -> Optional[Track]:
 
             print("Parsing Page")
 
-            soup = BeautifulSoup(page.content, "html5lib")
-            modal = soup.find(id="modalDownload")
+            page = BeautifulSoup(page.content, "html5lib")
 
-            checksum = re.search("MD5 Checksum: ([0-9a-f]{32})", modal.text).group(1)
-            links = list(
-                map(
-                    lambda link: link["href"],
-                    modal.find_all("a", href=re.compile("\\.mp3$")),
-                )
-            )
+            checksum, links = _get_track_info(page)
+            authors = _get_track_authors(page)
 
-            return Track(id=track_id, checksum=checksum, links=links)
+            return Track(id=track_id, checksum=checksum, links=links, authors=authors)
     except requests.exceptions.ConnectTimeout:
         print(f"Timed out connecting to {url}")
 
     return
 
 
-def get_url_for_track(track_id) -> str:
+def _get_url_for_track(track_id) -> str:
     return "https://ocremix.org/remix/OCR{0:05d}".format(track_id)
+
+
+def _get_track_info(page: BeautifulSoup) -> Tuple[str, Set[str]]:
+    modal = page.find(id="modalDownload")
+
+    checksum = re.search("MD5 Checksum: ([0-9a-f]{32})", modal.text).group(1)
+    links = set(
+        map(
+            lambda link: link["href"],
+            modal.find_all("a", href=re.compile("\\.mp3$")),
+        )
+    )
+
+    return checksum, links
+
+
+def _get_track_authors(page: BeautifulSoup) -> List[Author]:
+    byline = page.find("h2")
+    raw_authors = byline.find_all("a", href=True)
+
+    def get_author_from_element(element: Tag) -> Author:
+        return Author(name=element.string, url=element["href"])
+
+    return list(map(get_author_from_element, raw_authors))

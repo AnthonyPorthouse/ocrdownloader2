@@ -1,6 +1,6 @@
 from .. import __user_agent__
 from .downloader import Downloader
-from ..track import Track
+from ..data.track import Track
 import subprocess
 
 
@@ -16,7 +16,7 @@ class Aria2Downloader(Downloader):
             f"--dir={directory}",
         ]
 
-        completed_process = subprocess.run(command + track.links)
+        completed_process = subprocess.run(command + list(track.links))
 
         if completed_process.returncode != 0:
             raise RuntimeError
