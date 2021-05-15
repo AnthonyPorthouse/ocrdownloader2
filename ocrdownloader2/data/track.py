@@ -7,6 +7,7 @@ from .author import Author
 @dataclass
 class Track:
     id: int
+    title: str
     checksum: str
     links: Set[str]
     authors: List[Author]

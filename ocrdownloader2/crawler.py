@@ -17,6 +17,9 @@ def get_tracks(start: int, end: int) -> List[Track]:
         if track is None:
             continue
 
+        print(f"Track: {track.title}")
+        print(f"Authors: {', '.join(map(lambda author : author.name, track.authors))}")
+
         tracks.append(track)
 
     return tracks
@@ -52,8 +55,15 @@ def get_track(track_id) -> Optional[Track]:
 
             checksum, links = _get_track_info(page)
             authors = _get_track_authors(page)
+            title = _get_track_title(page)
 
-            return Track(id=track_id, checksum=checksum, links=links, authors=authors)
+            return Track(
+                id=track_id,
+                title=title,
+                authors=authors,
+                checksum=checksum,
+                links=links,
+            )
     except requests.exceptions.ConnectTimeout:
         print(f"Timed out connecting to {url}")
 
@@ -86,3 +96,7 @@ def _get_track_authors(page: BeautifulSoup) -> List[Author]:
         return Author(name=element.string, url=element["href"])
 
     return list(map(get_author_from_element, raw_authors))
+
+
+def _get_track_title(page: BeautifulSoup) -> str:
+    return page.find("meta", property="og:title")["content"].removesuffix(" OC ReMix")
