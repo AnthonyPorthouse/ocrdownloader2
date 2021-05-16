@@ -1,9 +1,7 @@
 name: Linting
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'
+  - pull_request
 
 jobs:
   lint:
