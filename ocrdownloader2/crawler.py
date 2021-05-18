@@ -108,4 +108,6 @@ def _get_track_title(page: BeautifulSoup) -> str:
 
     content = page.find("meta", property="og:title")["content"]
     if content.endswith(" OC ReMix"):
-        return content[:-9]
+        content = content[:-9]
+
+    return content

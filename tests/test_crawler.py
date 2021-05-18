@@ -82,10 +82,9 @@ def test_get_tracks_with_bad_responses(requests_mock):
 
 
 def test_get_track_title():
-    data = r"""
-    <!DOCTYPE html>
+    data = r"""<!DOCTYPE html>
     <html><head>
-    <meta property="og:title" content="The Legend of Zelda: Breath of the Wild \"Torchlight\" OC ReMix">
+    <meta property="og:title" content='The Legend of Zelda: Breath of the Wild "Torchlight" OC ReMix'>
     </head>
     <body>
     </body>
