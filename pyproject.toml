@@ -17,6 +17,7 @@ pytest = "^6.2"
 black = "^21.5b1"
 requests-mock = "^1.9.2"
 coverage = "^5.5"
+pytest-subprocess = "^1.1.0"
 
 [tool.poetry.scripts]
 ocrdownloader = "ocrdownloader2.cli:cli"

@@ -16,7 +16,7 @@ class Aria2Downloader(Downloader):
             f"--dir={directory}",
         ]
 
-        completed_process = subprocess.run(command + list(track.links))
+        completed_process = subprocess.run(command + list(sorted(track.links)))
 
         if completed_process.returncode != 0:
             raise RuntimeError
