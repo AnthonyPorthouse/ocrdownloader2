@@ -21,7 +21,7 @@ def cli(start: int, end: Optional[int], output: str):
     if end is None:
         end = start
 
-    click.echo(banner())
+    click.echo(_banner())
     click.echo()
 
     click.echo(f"From: {start}")
@@ -38,7 +38,7 @@ def cli(start: int, end: Optional[int], output: str):
         engine.download(output, track)
 
 
-def banner() -> str:
+def _banner() -> str:
     """Return the banner as a string"""
     return "\n".join(
         [
