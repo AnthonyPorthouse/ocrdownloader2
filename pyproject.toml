@@ -16,6 +16,7 @@ importlib-metadata = {version = "^1.0", python = "<3.8"}
 pytest = "^5.2"
 black = "^21.5b1"
 requests-mock = "^1.9.2"
+coverage = "^5.5"
 
 [tool.poetry.scripts]
 ocrdownloader = "ocrdownloader2.cli:cli"
@@ -23,6 +24,9 @@ ocrdownloader = "ocrdownloader2.cli:cli"
 [tool.black]
 target-version = ['py39']
 include = '\.pyi?$'
+
+[tool.coverage.run]
+source = ['ocrdownloader2']
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

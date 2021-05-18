@@ -23,4 +23,6 @@ jobs:
         run: poetry run black --check .
         continue-on-error: true
       - name: Tests
-        run: poetry run pytest
+        run: poetry run coverage -m pytest
+      - name: Coverage
+        run: poetry run coverage report
