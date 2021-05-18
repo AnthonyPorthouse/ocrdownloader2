@@ -15,7 +15,7 @@ from . import __version__
     default=".",
 )
 @click.version_option(__version__)
-def cli(start: int, end: Optional[int], output: str, version: bool):
+def cli(start: int, end: Optional[int], output: str):
     """Parse and handle arguments to run OCR Downloader"""
 
     if end is None:
