@@ -2,6 +2,7 @@ import click
 from typing import Optional
 from .crawler import get_tracks
 from .downloader import get_engine
+from . import __version__
 
 
 @click.command()
@@ -13,7 +14,8 @@ from .downloader import get_engine
     type=click.Path(exists=True, file_okay=False, writable=True),
     default=".",
 )
-def cli(start: int, end: Optional[int], output: str):
+@click.version_option(__version__)
+def cli(start: int, end: Optional[int], output: str, version: bool):
     """Parse and handle arguments to run OCR Downloader"""
 
     if end is None:
