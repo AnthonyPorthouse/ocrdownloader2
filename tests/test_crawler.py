@@ -2,8 +2,14 @@ import pytest
 import os.path
 
 import requests
+from bs4 import BeautifulSoup
 
-from ocrdownloader2.crawler import get_tracks, get_track, _get_url_for_track
+from ocrdownloader2.crawler import (
+    get_tracks,
+    get_track,
+    _get_url_for_track,
+    _get_track_title,
+)
 
 
 @pytest.mark.parametrize(
@@ -73,3 +79,21 @@ def test_get_tracks_with_bad_responses(requests_mock):
 
     assert len(tracks) == 1
     assert tracks[0].id == 1
+
+
+def test_get_track_title():
+    data = r"""
+    <!DOCTYPE html>
+    <html><head>
+    <meta property="og:title" content="The Legend of Zelda: Breath of the Wild \"Torchlight\" OC ReMix">
+    </head>
+    <body>
+    </body>
+    </html>
+    """
+
+    elements = BeautifulSoup(data, "html5lib")
+    assert (
+        _get_track_title(elements)
+        == 'The Legend of Zelda: Breath of the Wild "Torchlight"'
+    )

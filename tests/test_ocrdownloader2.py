@@ -1,5 +1,8 @@
+import re
+
 from ocrdownloader2 import __version__
 
 
 def test_version():
-    assert __version__ == "2.0.2"
+    assert isinstance(__version__, str)
+    assert re.match(r"\d+\.\d+\.\d+", __version__)

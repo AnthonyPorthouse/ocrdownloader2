@@ -5,7 +5,7 @@ description = "Download songs from OC ReMix before packs are available"
 authors = ["Anthony Porthouse <anthony@porthou.se>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.7"
 beautifulsoup4 = "^4.9.3"
 click = "^8.0.0"
 html5lib = "^1.1"
@@ -22,7 +22,7 @@ coverage = "^5.5"
 ocrdownloader = "ocrdownloader2.cli:cli"
 
 [tool.black]
-target-version = ['py39']
+target-version = ['py37', 'py38', 'py39']
 include = '\.pyi?$'
 
 [tool.coverage.run]

@@ -1,3 +1,5 @@
+import sys
+
 import requests
 import re
 from typing import List, Optional, Tuple, Set
@@ -99,4 +101,11 @@ def _get_track_authors(page: BeautifulSoup) -> List[Author]:
 
 
 def _get_track_title(page: BeautifulSoup) -> str:
-    return page.find("meta", property="og:title")["content"].removesuffix(" OC ReMix")
+    if sys.version_info >= (3, 9):
+        return page.find("meta", property="og:title")["content"].removesuffix(
+            " OC ReMix"
+        )
+
+    content = page.find("meta", property="og:title")["content"]
+    if content.endswith(" OC ReMix"):
+        return content[:-9]
