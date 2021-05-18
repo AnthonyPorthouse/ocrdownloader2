@@ -1,16 +1,21 @@
 import click
 from typing import Optional
 from .crawler import get_tracks
-from .downloader import download
+from .downloader import get_engine
+from . import __version__
 
 
 @click.command()
 @click.argument("start", type=click.IntRange(min=1, clamp=True))
 @click.argument("end", type=click.IntRange(min=1, clamp=True), required=False)
 @click.option(
-    "-o", "--output", type=click.Path(exists=True, file_okay=False, writable=True)
+    "-o",
+    "--output",
+    type=click.Path(exists=True, file_okay=False, writable=True),
+    default=".",
 )
-def cli(start: int, end: Optional[int], output: str):
+@click.version_option(__version__)
+def cli(start: int, end: Optional[int], output: str, version: bool):
     """Parse and handle arguments to run OCR Downloader"""
 
     if end is None:
@@ -25,8 +30,12 @@ def cli(start: int, end: Optional[int], output: str):
     tracks = get_tracks(start, end)
 
     click.echo(f"Downloading to: {output}")
+
+    engine = get_engine()
+
     for track in tracks:
-        download(output, track)
+        click.echo(f"Downloading Track {track.id}")
+        engine.download(output, track)
 
 
 def banner() -> str:

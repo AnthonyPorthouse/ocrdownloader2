@@ -1,22 +1,20 @@
-import subprocess
+from enum import Enum
+from typing import Optional
 
-from . import __user_agent__
-from .track import Track
-
-
-def download(directory: str, track: Track):
-    print(f"Downloading Track {track.id}")
-    aria2_download(directory, track)
+from .downloaders.aria2_downloader import Aria2Downloader
 
 
-def aria2_download(directory: str, track: Track):
-    command = [
-        "aria2c",
-        "--quiet",
-        "--check-integrity=true",
-        f"--user-agent=__user_agent__",
-        f"--checksum=md5={track.checksum}",
-        f"--dir={directory}",
-    ]
+class Engine(Enum):
+    ARIA_2 = "aria2"
 
-    subprocess.run(command + track.links)
+
+engines = {
+    Engine.ARIA_2: lambda: Aria2Downloader(),
+}
+
+
+def get_engine(engine: Optional[Engine] = None):
+    if engine is None:
+        engine = Engine.ARIA_2
+
+    return engines[engine]()

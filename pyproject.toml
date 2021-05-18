@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ocrdownloader2"
-version = "0.1.0"
+version = "2.0.1"
 description = "Download songs from OC ReMix before packs are available"
 authors = ["Anthony Porthouse <anthony@porthou.se>"]
 
@@ -10,6 +10,7 @@ beautifulsoup4 = "^4.9.3"
 click = "^8.0.0"
 html5lib = "^1.1"
 requests = "^2.25.1"
+importlib-metadata = {version = "^1.0", python = "<3.8"}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
