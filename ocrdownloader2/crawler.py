@@ -102,12 +102,11 @@ def _get_track_authors(page: BeautifulSoup) -> List[Author]:
 
 
 def _get_track_title(page: BeautifulSoup) -> str:
-    if sys.version_info >= (3, 9):
-        return page.find("meta", property="og:title")["content"].removesuffix(
-            " OC ReMix"
-        )
-
     content = page.find("meta", property="og:title")["content"]
+
+    if sys.version_info >= (3, 9):
+        return content.removesuffix(" OC ReMix")
+
     if content.endswith(" OC ReMix"):
         content = content[:-9]
 
