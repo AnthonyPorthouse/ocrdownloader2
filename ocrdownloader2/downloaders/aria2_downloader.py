@@ -1,7 +1,8 @@
-from .. import __user_agent__
-from .downloader import Downloader
-from ..data.track import Track
 import subprocess
+
+from .. import __user_agent__
+from ..data.track import Track
+from .downloader import Downloader
 
 
 class Aria2Downloader(Downloader):

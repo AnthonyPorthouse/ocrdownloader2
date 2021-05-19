@@ -1,6 +1,6 @@
+from ocrdownloader2 import __user_agent__
 from ocrdownloader2.data.track import Track
 from ocrdownloader2.downloaders.aria2_downloader import Aria2Downloader
-from ocrdownloader2 import __user_agent__
 
 
 def test_download(fake_process):

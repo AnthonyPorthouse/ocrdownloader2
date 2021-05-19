@@ -1,12 +1,13 @@
+import re
 import sys
+from typing import List, Optional, Set, Tuple
 
 import requests
-import re
-from typing import List, Optional, Tuple, Set
 from bs4 import BeautifulSoup, Tag
+
 from . import __user_agent__
-from .data.track import Track
 from .data.author import Author
+from .data.track import Track
 
 headers = {"User-Agent": __user_agent__}
 
