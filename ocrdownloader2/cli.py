@@ -1,8 +1,10 @@
-import click
 from typing import Optional
+
+import click
+
+from . import __version__
 from .crawler import get_tracks
 from .downloader import get_engine
-from . import __version__
 
 
 @click.command()

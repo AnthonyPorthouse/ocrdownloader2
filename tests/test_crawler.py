@@ -1,14 +1,14 @@
-import pytest
 import os.path
 
+import pytest
 import requests
 from bs4 import BeautifulSoup
 
 from ocrdownloader2.crawler import (
-    get_tracks,
-    get_track,
-    _get_url_for_track,
     _get_track_title,
+    _get_url_for_track,
+    get_track,
+    get_tracks,
 )
 
 

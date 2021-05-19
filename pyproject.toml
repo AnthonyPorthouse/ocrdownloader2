@@ -17,9 +17,16 @@ pytest = "^6.2"
 black = "^21.5b1"
 requests-mock = "^1.9.2"
 coverage = "^5.5"
+pytest-subprocess = "^1.1.0"
+pytest-mock = "^3.6.1"
+isort = "^5.8.0"
 
 [tool.poetry.scripts]
 ocrdownloader = "ocrdownloader2.cli:cli"
+
+[tool.isort]
+profile = "black"
+src_paths = ["ocrdownloader2", "test"]
 
 [tool.black]
 target-version = ['py37', 'py38', 'py39']
