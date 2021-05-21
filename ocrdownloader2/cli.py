@@ -4,7 +4,7 @@ import click
 
 from . import __version__
 from .crawler import get_tracks
-from .downloader import get_engine
+from .downloader import Engine, get_engine
 
 
 @click.command()
@@ -16,8 +16,9 @@ from .downloader import get_engine
     type=click.Path(exists=True, file_okay=False, writable=True),
     default=".",
 )
+@click.option("-p", "--python", is_flag=True)
 @click.version_option(__version__)
-def cli(start: int, end: Optional[int], output: str):
+def cli(start: int, end: Optional[int], output: str, python: bool = False):
     """Parse and handle arguments to run OCR Downloader"""
 
     if end is None:
@@ -33,7 +34,10 @@ def cli(start: int, end: Optional[int], output: str):
 
     click.echo(f"Downloading to: {output}")
 
-    engine = get_engine()
+    engine = Engine.ARIA_2
+    if python:
+        engine = Engine.PYTHON
+    engine = get_engine(engine)
 
     for track in tracks:
         click.echo(f"Downloading Track {track.id}")

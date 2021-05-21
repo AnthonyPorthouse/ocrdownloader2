@@ -6,7 +6,7 @@ from .downloader import Downloader
 
 
 class Aria2Downloader(Downloader):
-    def download(self, directory: str, track: Track):
+    def download(self, directory: str, track: Track) -> None:
         command = [
             "aria2c",
             "--check-integrity=true",
