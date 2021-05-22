@@ -1,3 +1,4 @@
+import shutil
 from typing import Optional
 
 import click
@@ -16,7 +17,12 @@ from .downloader import Engine, get_engine
     type=click.Path(exists=True, file_okay=False, writable=True),
     default=".",
 )
-@click.option("-p", "--python", is_flag=True)
+@click.option(
+    "-p",
+    "--python",
+    is_flag=True,
+    help="Force use of the python downloader, even if aria2 is available",
+)
 @click.version_option(__version__)
 def cli(start: int, end: Optional[int], output: str, python: bool = False):
     """Parse and handle arguments to run OCR Downloader"""
@@ -34,9 +40,11 @@ def cli(start: int, end: Optional[int], output: str, python: bool = False):
 
     click.echo(f"Downloading to: {output}")
 
-    engine = Engine.ARIA_2
-    if python:
-        engine = Engine.PYTHON
+    engine = None
+
+    if shutil.which("aria2c") is not None and not python:
+        engine = Engine.ARIA_2
+
     engine = get_engine(engine)
 
     for track in tracks:

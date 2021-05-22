@@ -18,6 +18,6 @@ engines = {
 
 def get_engine(engine: Optional[Engine] = None):
     if engine is None:
-        engine = Engine.ARIA_2
+        engine = Engine.PYTHON
 
     return engines[engine]()
