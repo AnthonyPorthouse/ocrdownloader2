@@ -5,5 +5,5 @@ from ..data.track import Track
 
 class Downloader(ABC):
     @abstractmethod
-    def download(self, directory: str, track: Track):
+    def download(self, directory: str, track: Track) -> None:
         pass  # pragma: no cover
