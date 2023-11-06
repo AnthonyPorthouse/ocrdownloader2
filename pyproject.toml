@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ocrdownloader2"
-version = "2.2.0"
+version = "2.2.1"
 description = "Download songs from OC ReMix before packs are available"
 authors = ["Anthony Porthouse <anthony@porthou.se>"]
 
