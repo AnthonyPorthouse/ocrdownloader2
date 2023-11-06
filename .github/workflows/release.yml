@@ -16,7 +16,7 @@ jobs:
       POETRY_VIRTUALENVS_CREATE: false
     steps:
       - uses: google-github-actions/release-please-action@v3
-        id: releases_created
+        id: release
         with:
           release-type: python
       
@@ -39,7 +39,7 @@ jobs:
       - name: Install Poetry
         if: ${{ steps.release.outputs.releases_created }}
         run: pipx install poetry
-        
+
       - name: Build
         if: ${{ steps.release.outputs.releases_created }}
         run: poetry build
