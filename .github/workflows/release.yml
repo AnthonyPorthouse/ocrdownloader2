@@ -2,8 +2,12 @@ name: Release
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   build:
@@ -11,26 +15,41 @@ jobs:
     env:
       POETRY_VIRTUALENVS_CREATE: false
     steps:
+      - uses: google-github-actions/release-please-action@v3
+        id: releases_created
+        with:
+          release-type: python
+      
       - name: Checkout
+        if: ${{ steps.release.outputs.releases_created }}
         uses: actions/checkout@v2
+
       - name: Setup Python
+        if: ${{ steps.release.outputs.releases_created }}
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
+
       - uses: actions/cache@v2
+        if: ${{ steps.release.outputs.releases_created }}
         with:
           path: ${{ env.pythonLocation }}
           key: ${{ env.pythonLocation }}-${{ hashFiles('poetry.lock') }}
+
       - name: Install Poetry
+        if: ${{ steps.release.outputs.releases_created }}
         uses: abatilo/actions-poetry@v2.0.0
         with:
           poetry-version: 1.1.6
+          
       - name: Build
+        if: ${{ steps.release.outputs.releases_created }}
         run: poetry build
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files:
-            dist/*.whl
+
+      - name: Upload Release Artifact
+        if: ${{ steps.release.outputs.release_created }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run:
+          gh release upload ${{ steps.release.outputs.tag_name }} dist/*.whl
+      
