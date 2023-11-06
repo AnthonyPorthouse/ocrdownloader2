@@ -38,10 +38,8 @@ jobs:
 
       - name: Install Poetry
         if: ${{ steps.release.outputs.releases_created }}
-        uses: abatilo/actions-poetry@v2.0.0
-        with:
-          poetry-version: 1.1.6
-          
+        run: pipx install poetry
+        
       - name: Build
         if: ${{ steps.release.outputs.releases_created }}
         run: poetry build
