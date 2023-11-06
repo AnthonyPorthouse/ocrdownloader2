@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ['3.7', '3.8', '3.9', '3.10-dev']
+        python: ['3.7', '3.8', '3.9', '3.10', '3.11', '3.12']
     env:
       POETRY_VIRTUALENVS_CREATE: false
     steps:
@@ -24,9 +24,7 @@ jobs:
           path: ${{ env.pythonLocation }}
           key: ${{ env.pythonLocation }}-${{ hashFiles('poetry.lock') }}
       - name: Install Poetry
-        uses: abatilo/actions-poetry@v2.0.0
-        with:
-          poetry-version: 1.1.6
+        run: pipx install poetry
       - name: Install
         run: poetry install
       - name: isort
