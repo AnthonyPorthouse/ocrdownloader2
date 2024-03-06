@@ -12,14 +12,12 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      POETRY_VIRTUALENVS_CREATE: false
     steps:
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
           release-type: python
-      
+
       - name: Checkout
         if: ${{ steps.release.outputs.releases_created }}
         uses: actions/checkout@v2
@@ -28,17 +26,20 @@ jobs:
         if: ${{ steps.release.outputs.releases_created }}
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: 3.12
 
-      - uses: actions/cache@v2
+      - name: Cache the virtualenv
+        uses: actions/cache@v2
         if: ${{ steps.release.outputs.releases_created }}
         with:
-          path: ${{ env.pythonLocation }}
-          key: ${{ env.pythonLocation }}-${{ hashFiles('poetry.lock') }}
+          path: ./.venv
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install Poetry
         if: ${{ steps.release.outputs.releases_created }}
-        run: pipx install poetry
+        run: |
+          pipx install poetry
+          poetry config virtualenvs.in-project true
 
       - name: Build
         if: ${{ steps.release.outputs.releases_created }}
@@ -50,4 +51,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run:
           gh release upload ${{ steps.release.outputs.tag_name }} dist/*.whl
-      
