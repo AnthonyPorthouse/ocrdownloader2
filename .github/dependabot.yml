@@ -6,8 +6,8 @@ updates:
     schedule:
       interval: "weekly"
       day: "monday"
-  
-  - package-ecosystem: "poetry"
+
+  - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "weekly"
