@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/AnthonyPorthouse/ocrdownloader2/compare/v2.2.1...v3.0.0) (2024-03-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* bump minimum python version to 3.8
+
+### Features
+
+* bump minimum python version to 3.8 ([53901e1](https://github.com/AnthonyPorthouse/ocrdownloader2/commit/53901e1eb7fbef8dcef34599c5613caac86307d4))
+
 ## [2.2.1](https://github.com/AnthonyPorthouse/ocrdownloader2/compare/v2.2.0...v2.2.1) (2023-11-06)
 
 
