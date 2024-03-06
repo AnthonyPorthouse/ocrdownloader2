@@ -9,8 +9,6 @@ jobs:
     strategy:
       matrix:
         python: ['3.8', '3.9', '3.10', '3.11', '3.12']
-    env:
-      POETRY_VIRTUALENVS_CREATE: false
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -24,7 +22,16 @@ jobs:
           path: ${{ env.pythonLocation }}
           key: ${{ env.pythonLocation }}-${{ hashFiles('poetry.lock') }}
       - name: Install Poetry
-        run: pipx install poetry
+        run: |
+          pipx install poetry
+          poetry config virtualenvs.in-project true
+
+      - name: Cache the virtualenv
+        uses: actions/cache@v2
+        with:
+          path: ./.venv
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
+
       - name: Install
         run: poetry install
       - name: isort
