@@ -13,7 +13,7 @@ requests = "^2.25.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^8.1"
-black = "^24.0"
+black = "^24.3"
 requests-mock = "^1.9.2"
 coverage = "^7.4"
 pytest-subprocess = "^1.1.0"
