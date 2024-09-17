@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.1](https://github.com/AnthonyPorthouse/ocrdownloader2/compare/v3.1.0...v3.1.1) (2024-09-17)
+
+
+### Bug Fixes
+
+* correct cyclic dependencies ([561bcda](https://github.com/AnthonyPorthouse/ocrdownloader2/commit/561bcdacad7244c07e018560d040650c4f077a5f))
+
 ## [3.1.0](https://github.com/AnthonyPorthouse/ocrdownloader2/compare/v3.0.0...v3.1.0) (2024-09-17)
 
 
