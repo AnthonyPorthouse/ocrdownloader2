@@ -1,4 +1,5 @@
 import shutil
+from dataclasses import dataclass
 from typing import Optional
 
 import click
@@ -6,6 +7,12 @@ import click
 from . import __version__
 from .crawler import get_tracks
 from .downloader import Engine, get_engine
+
+
+@dataclass
+class Options:
+    use_python: bool = False
+    use_checksum: bool = True
 
 
 @click.command()
@@ -23,8 +30,19 @@ from .downloader import Engine, get_engine
     is_flag=True,
     help="Force use of the python downloader, even if aria2 is available",
 )
+@click.option(
+    "--no-checksum",
+    is_flag=True,
+    help="Don't check the validity of the file via the checksum",
+)
 @click.version_option(__version__)
-def cli(start: int, end: Optional[int], output: str, python: bool = False):
+def cli(
+    start: int,
+    end: Optional[int],
+    output: str,
+    python: bool = False,
+    no_checksum: bool = False,
+):
     """Parse and handle arguments to run OCR Downloader"""
 
     if end is None:
@@ -47,9 +65,11 @@ def cli(start: int, end: Optional[int], output: str, python: bool = False):
 
     engine = get_engine(engine)
 
+    options = Options(use_python=python, use_checksum=not no_checksum)
+
     for track in tracks:
         click.echo(f"Downloading Track {track.id}")
-        engine.download(output, track)
+        engine.download(output, track, options)
 
 
 def _banner() -> str:
