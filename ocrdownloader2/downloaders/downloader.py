@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
-from ..cli import Options
 from ..data.track import Track
+from .options import Options
 
 
 class Downloader(ABC):

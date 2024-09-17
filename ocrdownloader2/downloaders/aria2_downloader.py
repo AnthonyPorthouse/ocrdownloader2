@@ -1,9 +1,9 @@
 import subprocess
 
 from .. import __user_agent__
-from ..cli import Options
 from ..data.track import Track
 from .downloader import Downloader
+from .options import Options
 
 
 class Aria2Downloader(Downloader):

@@ -1,5 +1,4 @@
 import shutil
-from dataclasses import dataclass
 from typing import Optional
 
 import click
@@ -7,12 +6,7 @@ import click
 from . import __version__
 from .crawler import get_tracks
 from .downloader import Engine, get_engine
-
-
-@dataclass
-class Options:
-    use_python: bool = False
-    use_checksum: bool = True
+from .downloaders.options import Options
 
 
 @click.command()
