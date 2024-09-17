@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/AnthonyPorthouse/ocrdownloader2/compare/v3.0.0...v3.1.0) (2024-09-17)
+
+
+### Features
+
+* allow ignoring checksums in aria2 ([40dcc23](https://github.com/AnthonyPorthouse/ocrdownloader2/commit/40dcc2312cb9cd615a6350bfcb62787c15714251))
+
 ## [3.0.0](https://github.com/AnthonyPorthouse/ocrdownloader2/compare/v2.2.1...v3.0.0) (2024-03-06)
 
 
