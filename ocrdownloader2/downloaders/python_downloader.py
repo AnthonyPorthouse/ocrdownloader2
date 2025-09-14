@@ -9,12 +9,13 @@ import requests
 from .. import __user_agent__
 from ..data.track import Track
 from .downloader import Downloader
+from .options import Options
 
 _headers = {"User-Agent": __user_agent__}
 
 
 class PythonDownloader(Downloader):
-    def download(self, directory: str, track: Track) -> None:
+    def download(self, directory: str, track: Track, options: Options) -> None:
         file_size, filtered_mirrors = self._check_mirrors(track.links)
 
         chunk_size = file_size // len(filtered_mirrors)

@@ -77,10 +77,12 @@ def _get_url_for_track(track_id) -> str:
     return "https://ocremix.org/remix/OCR{0:05d}".format(track_id)
 
 
-def _get_track_info(page: BeautifulSoup) -> Tuple[str, Set[str]]:
+def _get_track_info(page: BeautifulSoup) -> Tuple[Optional[str], Set[str]]:
     modal = page.find(id="modalDownload")
 
-    checksum = re.search("MD5 Checksum: ([0-9a-f]{32})", modal.text).group(1)
+    # Checksum has been removed from site
+    # checksum = re.search("MD5 Checksum: ([0-9a-f]{32})", modal.text).group(1)
+    checksum = None
     links = set(
         map(
             lambda link: link["href"],
