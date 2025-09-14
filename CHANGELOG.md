@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.2.0](https://github.com/AnthonyPorthouse/ocrdownloader2/compare/v3.1.1...v3.2.0) (2025-09-14)
+
+
+### Features
+
+* support the new ocremix website layout ([7bd142c](https://github.com/AnthonyPorthouse/ocrdownloader2/commit/7bd142caaa333794add2988ae04ae34c24ec166f))
+* support the new ocremix website layout ([350b59c](https://github.com/AnthonyPorthouse/ocrdownloader2/commit/350b59c000d5d2e3346371083f13d01c763dad30))
+
 ## [3.1.1](https://github.com/AnthonyPorthouse/ocrdownloader2/compare/v3.1.0...v3.1.1) (2024-09-17)
 
 
