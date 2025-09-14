@@ -17,7 +17,7 @@ class Aria2Downloader(Downloader):
             f"--dir={directory}",
         ]
 
-        if options.use_checksum:
+        if options.use_checksum and track.checksum:
             command.append(f"--checksum=md5={track.checksum}")
 
         completed_process = subprocess.run(command + list(sorted(track.links)))

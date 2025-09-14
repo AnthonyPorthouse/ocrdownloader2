@@ -1,24 +1,24 @@
 [tool.poetry]
 name = "ocrdownloader2"
-version = "3.1.1"
+version = "3.2.0"
 description = "Download songs from OC ReMix before packs are available"
 authors = ["Anthony Porthouse <anthony@porthou.se>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.12"
 beautifulsoup4 = "^4.9.3"
 click = "^8.0.0"
 html5lib = "^1.1"
 requests = "^2.25.1"
 
-[tool.poetry.dev-dependencies]
-pytest = "^8.1"
-black = "^24.0"
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4"
+black = "^25.0"
 requests-mock = "^1.9.2"
 coverage = "^7.4"
 pytest-subprocess = "^1.1.0"
 pytest-mock = "^3.14.0"
-isort = "^5.8.0"
+isort = "^6.0"
 
 [tool.poetry.scripts]
 ocrdownloader = "ocrdownloader2.cli:cli"
@@ -28,7 +28,7 @@ profile = "black"
 src_paths = ["ocrdownloader2", "test"]
 
 [tool.black]
-target-version = ['py311']
+target-version = ['py313']
 include = '\.pyi?$'
 
 [tool.coverage.run]
