@@ -19,7 +19,6 @@ jobs:
           python-version: ${{matrix.python}}
 
       - name: Install uv
-        if: ${{ steps.release.outputs.releases_created }}
         uses: astral-sh/setup-uv@v6
 
       - name: Cache the virtualenv
