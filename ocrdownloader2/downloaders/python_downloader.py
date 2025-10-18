@@ -67,7 +67,6 @@ class PythonDownloader(Downloader):
         return file_size, approved_mirrors
 
     async def _download(self, downloads: list):
-
         loop = asyncio.get_running_loop()
 
         futures = []
