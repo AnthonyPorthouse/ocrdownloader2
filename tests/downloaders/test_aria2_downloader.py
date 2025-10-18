@@ -12,8 +12,8 @@ def test_download(fake_process):
             "--console-log-level=error",
             "--download-result=hide",
             f"--user-agent={__user_agent__}",
-            f"--dir=directory",
-            f"--checksum=md5=123abc",
+            "--dir=directory",
+            "--checksum=md5=123abc",
             "1",
             "2",
         ]

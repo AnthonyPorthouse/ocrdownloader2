@@ -17,12 +17,12 @@ ocrdownloader = "ocrdownloader2.cli:cli"
 [dependency-groups]
 dev = [
     "pytest~=8.4",
-    "black~=25.0",
     "requests-mock>=1.9.2,<2",
     "coverage~=7.4",
     "pytest-subprocess>=1.1.0,<2",
     "pytest-mock>=3.14.0,<4",
     "isort~=6.0",
+    "ruff>=0.14.1",
 ]
 
 [build-system]
@@ -30,12 +30,10 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.isort]
-profile = "black"
+profile = "ruff"
 src_paths = ["ocrdownloader2", "test"]
 
-[tool.black]
-target-version = ['py313']
-include = '\.pyi?$'
+[tool.ruff]
 
 [tool.coverage.run]
 source = ['ocrdownloader2']

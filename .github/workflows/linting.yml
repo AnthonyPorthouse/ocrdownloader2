@@ -34,8 +34,8 @@ jobs:
         run: uv run isort --check .
         continue-on-error: true
 
-      - name: Black
-        run: uv run black --check .
+      - name: Ruff
+        run: uv run ruff check
         continue-on-error: true
 
       - name: Tests
