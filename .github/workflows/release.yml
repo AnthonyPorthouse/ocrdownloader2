@@ -28,22 +28,20 @@ jobs:
         with:
           python-version: 3.12
 
+      - name: Install uv
+        if: ${{ steps.release.outputs.releases_created }}
+        uses: astral-sh/setup-uv@v6
+
       - name: Cache the virtualenv
         uses: actions/cache@v4
         if: ${{ steps.release.outputs.releases_created }}
         with:
           path: ./.venv
-          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
-
-      - name: Install Poetry
-        if: ${{ steps.release.outputs.releases_created }}
-        run: |
-          pipx install poetry
-          poetry config virtualenvs.in-project true
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/uv.lock') }}
 
       - name: Build
         if: ${{ steps.release.outputs.releases_created }}
-        run: poetry build
+        run: uv build
 
       - name: Upload Release Artifact
         if: ${{ steps.release.outputs.release_created }}

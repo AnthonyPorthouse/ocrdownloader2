@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ['3.8', '3.9', '3.10', '3.11', '3.12']
+        python: ['3.12', '3.13', '3.14']
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -18,30 +18,29 @@ jobs:
         with:
           python-version: ${{matrix.python}}
 
-      - name: Install Poetry
-        run: |
-          pipx install poetry
-          poetry config virtualenvs.in-project true
+      - name: Install uv
+        if: ${{ steps.release.outputs.releases_created }}
+        uses: astral-sh/setup-uv@v6
 
       - name: Cache the virtualenv
         uses: actions/cache@v4
         with:
           path: ./.venv
-          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/uv.lock') }}
 
       - name: Install
-        run: poetry install
+        run: uv sync
 
       - name: isort
-        run: poetry run isort --check .
+        run: uv run isort --check .
         continue-on-error: true
 
       - name: Black
-        run: poetry run black --check .
+        run: uv run black --check .
         continue-on-error: true
 
       - name: Tests
-        run: poetry run coverage run -m pytest
+        run: uv run coverage run -m pytest
 
       - name: Coverage
-        run: poetry run coverage report
+        run: uv run coverage report

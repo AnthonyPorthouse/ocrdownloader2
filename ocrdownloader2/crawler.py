@@ -21,7 +21,7 @@ def get_tracks(start: int, end: int) -> List[Track]:
             continue
 
         print(f"Track: {track.title}")
-        print(f"Authors: {', '.join(map(lambda author : author.name, track.authors))}")
+        print(f"Authors: {', '.join(map(lambda author: author.name, track.authors))}")
 
         tracks.append(track)
 
@@ -41,7 +41,6 @@ def _backoff(func):
 
 @_backoff
 def get_track(track_id) -> Optional[Track]:
-
     print(f"Loading Track: {track_id}")
 
     url = _get_url_for_track(track_id)
