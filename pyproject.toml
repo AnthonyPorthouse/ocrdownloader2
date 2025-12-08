@@ -16,7 +16,7 @@ ocrdownloader = "ocrdownloader2.cli:cli"
 
 [dependency-groups]
 dev = [
-    "pytest~=8.4",
+    "pytest>=8.4,<10.0",
     "requests-mock>=1.9.2,<2",
     "coverage~=7.4",
     "pytest-subprocess>=1.1.0,<2",
